@@ -1,3 +1,5 @@
+//no touch screen rotation pad, rotation direction and move with one joystick
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
