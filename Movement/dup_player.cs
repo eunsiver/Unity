@@ -27,3 +27,6 @@ public class dup_player : MonoBehaviour
     moving_object.Translate(Vector3.forward * Time.fixedDeltaTime * speed);
   }
 }
+
+
+//https://saens.tistory.com/5
