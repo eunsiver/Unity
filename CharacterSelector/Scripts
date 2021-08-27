@@ -1,0 +1,77 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class NewCharacter : MonoBehaviour
+{
+  // Start is called before the first frame update
+  [SerializeField]
+  private GameObject[] characters;
+  private int characterIndex;
+
+  void Awake()
+  {
+    for (int i = 0; i < characters.Length; i++)
+    {
+      characters[i].SetActive(false);
+    }
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+
+  }
+  public void ChangeCharacter(int index)
+  {
+    for (int i = 0; i < characters.Length; i++)
+    {
+      characters[i].SetActive(false);
+    }
+    this.characterIndex = index;
+    characters[index].SetActive(true);
+  }
+  public void Save()
+  {
+    SceneManager.LoadScene("Im_Move");
+    PlayerPrefs.SetInt("CharacterIndex", characterIndex);
+  }
+}
+-----------------------------------------------------------------------------------------------------------------
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class NewCharacterSelected : MonoBehaviour
+{
+  // Start is called before the first frame update
+
+
+  [SerializeField]
+  private GameObject[] characterPre;
+  public GameObject Parent;
+
+
+
+  void Start()
+  {
+    LoadCharacter();
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+
+  }
+  public void LoadCharacter()
+  {
+    int characterIndex = PlayerPrefs.GetInt("CharacterIndex");
+
+    GameObject child = Instantiate(characterPre[characterIndex]) as GameObject;
+    child.transform.SetParent(Parent.transform, false);
+    //GameObject.Instantiate(characterPre[characterIndex]);
+
+    //[RequireComponent]
+  }
+}
