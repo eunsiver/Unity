@@ -8,14 +8,21 @@ public class dup_player : MonoBehaviour
   public Transform moving_object;
   public float speed = 20f;
   public Transform camPivot;
+  [SerializeField] private GameObject fixedJoystick;
 
   private Joystick controller;
+  Vector3 position;
+  [SerializeField] private GameObject parentCharacter;
+  ///////
+  public float Kspeed = 2F;
+  public float rotationSpeed = 100.0F;
+
   private void Awake()
   {
-    controller = this.GetComponent<Joystick>();
+    controller = fixedJoystick.GetComponent<Joystick>();
   }
 
-  private void FixedUpdate()
+  void FixedUpdate()
   {
     Vector2 conDir = controller.Direction;
     if (conDir == Vector2.zero) return;
@@ -25,8 +32,22 @@ public class dup_player : MonoBehaviour
     Vector3 moveAngle = Vector3.up * (camPivot.transform.rotation.eulerAngles.y + thetaEuler);
     moving_object.rotation = Quaternion.Euler(moveAngle);
     moving_object.Translate(Vector3.forward * Time.fixedDeltaTime * speed);
+
+  }
+
+  void Update()
+  {
+    float translation = Input.GetAxis("Vertical") * Kspeed;
+    float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+    translation *= Time.deltaTime;
+    rotation *= Time.deltaTime;
+    transform.Translate(0, 0, translation);
+    transform.Rotate(0, rotation, 0);
+    if (translation != 0)
+    {
+      LoadCharacter.Character_anim.Play();
+    }
+    else
+      LoadCharacter.Character_anim.Stop();
   }
 }
-
-
-//https://saens.tistory.com/5

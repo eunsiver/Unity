@@ -38,7 +38,7 @@ public class dup_rotationCam : MonoBehaviour, IBeginDragHandler, IDragHandler
     xAngle = xAngleTemp - (draggingPos.y - beginPos.y) * 90 / Screen.height * rotationSpeed;
 
     if (xAngle > 50) xAngle = 50;
-    if (xAngle < -30) xAngle = -30;
+    if (xAngle < -12) xAngle = -12;
 
     camPivot.rotation = Quaternion.Euler(xAngle, yAngle, 0.0f);
   }
