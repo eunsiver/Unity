@@ -43,11 +43,11 @@ public class dup_player : MonoBehaviour
     rotation *= Time.deltaTime;
     transform.Translate(0, 0, translation);
     transform.Rotate(0, rotation, 0);
-    if (translation != 0)
+    if (translation != 0&&Joystick.Joystick_playing!=1)
     {
       LoadCharacter.Character_anim.Play();
     }
-    else
+    else if(translation == 0&&Joystick.Joystick_playing!=1)
       LoadCharacter.Character_anim.Stop();
   }
 }
